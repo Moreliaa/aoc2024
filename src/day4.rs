@@ -69,7 +69,6 @@ pub fn run(input: String) {
                         continue 'y;
                     }
                 }
-                println!("{chars_found}");
                 p2 += 1;
             }
         }
