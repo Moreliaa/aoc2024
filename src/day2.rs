@@ -1,15 +1,14 @@
 pub fn run(input: String) {
-    
     let mut p1 = 0;
     let mut p2 = 0;
 
-    for line in  input.lines().into_iter() {
+    for line in input.lines().into_iter() {
         let values: Vec<i32> = line.split(" ").map(|l| l.parse::<i32>().unwrap()).collect();
         let r = check(values, false);
         p1 += r.0;
         p2 += r.1;
     }
-   
+
     println!("Part 1: {p1}");
     println!("Part 2: {p2}");
 }

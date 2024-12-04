@@ -4,10 +4,13 @@ mod day1;
 mod day2;
 #[allow(dead_code)]
 mod day3;
+#[allow(dead_code)]
+mod day4;
 extern crate aoc_lib;
 
 fn main() {
     //day1::run(aoc_lib::input_reader::get_input("2024", "1", "cookie.txt"));
     //day2::run(aoc_lib::input_reader::get_input("2024", "2", "cookie.txt"));
-    day3::run(aoc_lib::input_reader::get_input("2024", "3", "cookie.txt"));
+    //day3::run(aoc_lib::input_reader::get_input("2024", "3", "cookie.txt"));
+    day4::run(aoc_lib::input_reader::get_input("2024", "4", "cookie.txt"));
 }

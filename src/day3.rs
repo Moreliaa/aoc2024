@@ -1,11 +1,10 @@
 use fancy_regex::Regex;
 
 pub fn run(input: String) {
-    
     let mut p1 = 0;
     let mut p2 = 0;
     let rx = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
-        
+
     let split = input.split(r"do()");
     for s in split {
         let mut s_split = s.split(r"don't()").into_iter();
@@ -26,7 +25,7 @@ pub fn run(input: String) {
             }
         }
     }
-   
+
     println!("Part 1: {p1}");
     println!("Part 2: {p2}");
 }
