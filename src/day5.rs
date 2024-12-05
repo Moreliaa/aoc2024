@@ -4,7 +4,7 @@ use std::collections::HashSet;
 
 pub fn run(input: String) {
     let mut split = input.split("\n\n");
-    let mut rules: Vec<(i32, i32)> = split.next().unwrap().split("\n")
+    let rules: Vec<(i32, i32)> = split.next().unwrap().split("\n")
         .map(|a| {
             let mut a_split = a.split("|");
             (a_split.next().unwrap().parse::<i32>().unwrap(), a_split.next().unwrap().parse::<i32>().unwrap())
@@ -30,15 +30,11 @@ pub fn run(input: String) {
         }
         prio_map.get_mut(&r.0).unwrap().insert(r.1);
     }
-    
-    println!("PrioMap: {:?}", prio_map);
-    //println!("{:?}\n\n{:?}", rules, updates);
     let mut p1 = 0;
     let mut p2 = 0;
 
     for update in updates {
         if check_ordered(&prio_map, &update) {
-            //println!("Success {:?}", update);
             p1 += update[update.len() / 2];
         } else {
             let mut cloned = update.clone();
@@ -52,7 +48,6 @@ pub fn run(input: String) {
             });
             p2 += cloned[cloned.len() / 2];
         }
-        
     }
 
     println!("Part 1: {p1}");
@@ -70,7 +65,6 @@ fn check_ordered(prio_map: &HashMap<i32, HashSet<i32>>, update: &Vec<i32>) -> bo
             if !u_prio.unwrap().contains(&b) {
                 return false;
             }
-            
         }
     }
     return true;
