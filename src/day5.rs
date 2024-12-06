@@ -4,22 +4,31 @@ use std::collections::HashSet;
 
 pub fn run(input: String) {
     let mut split = input.split("\n\n");
-    let rules: Vec<(i32, i32)> = split.next().unwrap().split("\n")
+    let rules: Vec<(i32, i32)> = split
+        .next()
+        .unwrap()
+        .split("\n")
         .map(|a| {
             let mut a_split = a.split("|");
-            (a_split.next().unwrap().parse::<i32>().unwrap(), a_split.next().unwrap().parse::<i32>().unwrap())
-        }
-        ).collect();
-    let updates: Vec<Vec<i32>> = split.next().unwrap().split("\n")
-        .map(
-            |a| a.split(",").filter(|a| a.len() > 0)
-            .map(
-                |a| a.parse::<i32>().unwrap()
-            ).collect()
-        ).filter(
-            |a: &Vec<i32>| a.len() > 0
-        ).collect();
-    
+            (
+                a_split.next().unwrap().parse::<i32>().unwrap(),
+                a_split.next().unwrap().parse::<i32>().unwrap(),
+            )
+        })
+        .collect();
+    let updates: Vec<Vec<i32>> = split
+        .next()
+        .unwrap()
+        .split("\n")
+        .map(|a| {
+            a.split(",")
+                .filter(|a| a.len() > 0)
+                .map(|a| a.parse::<i32>().unwrap())
+                .collect()
+        })
+        .filter(|a: &Vec<i32>| a.len() > 0)
+        .collect();
+
     let mut prio_map: HashMap<i32, HashSet<i32>> = HashMap::new();
     for r in rules {
         if !prio_map.contains_key(&r.0) {
