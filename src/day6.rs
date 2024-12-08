@@ -3,15 +3,13 @@ use std::collections::HashSet;
 
 pub fn run(input: String) {
     let mut map = Map2D::from_string(input.clone());
-
-    let mut p1 = 0;
-    let mut p2 = 0;
-
+    
     let mut g = get_guard(&map);
     let g_cloned = g.clone();
     while g.step(&mut map) {}
 
-    p1 = map.aggregate(|tile, _, _| if *tile == 'X' { 1 } else { 0 });
+    let p1 = map.aggregate(|tile, _, _| if *tile == 'X' { 1 } else { 0 });
+    let mut p2 = 0;
 
     for x in 0..map.width() {
         'y: for y in 0..map.height() {

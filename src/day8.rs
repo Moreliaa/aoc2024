@@ -23,9 +23,6 @@ pub fn run(input: String) {
     let mut map_anti = Map2D::new(map.width(), map.height(), '.');
     let mut map_anti_pt2 = Map2D::new(map.width(), map.height(), '.');
 
-    let mut p1 = 0;
-    let mut p2 = 0;
-
     for (_, nodes) in nodes.into_iter() {
         for i in 0..nodes.len() {
             let n1 = nodes[i];
@@ -39,13 +36,13 @@ pub fn run(input: String) {
                 step(&mut map_anti, &n1, &n2, n2.0, n2.1, -step_x, -step_y);
 
                 step_pt2(&mut map_anti_pt2, n1.0, n1.1, step_x, step_y);
-                step_pt2(&mut map_anti_pt2,  n1.0, n1.1, -step_x, -step_y);
+                step_pt2(&mut map_anti_pt2, n1.0, n1.1, -step_x, -step_y);
             }
         }
     }
 
-    p1 = map_anti.aggregate(|tile, _, _| if *tile == '#' { 1 } else { 0 });
-    p2 = map_anti_pt2.aggregate(|tile, _, _| if *tile == '#' { 1 } else { 0 });
+    let p1 = map_anti.aggregate(|tile, _, _| if *tile == '#' { 1 } else { 0 });
+    let p2 = map_anti_pt2.aggregate(|tile, _, _| if *tile == '#' { 1 } else { 0 });
 
     println!("Part 1: {p1}");
     println!("Part 2: {p2}");
