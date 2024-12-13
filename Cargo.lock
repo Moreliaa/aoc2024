@@ -34,6 +34,7 @@ dependencies = [
  "fancy-regex",
  "itertools",
  "num",
+ "num-bigint",
 ]
 
 [[package]]
