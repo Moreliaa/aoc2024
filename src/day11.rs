@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use num_bigint::BigUint;
+use std::collections::HashMap;
 
 pub fn run(input: String) {
     let mut p1 = BigUint::ZERO;
@@ -29,7 +29,6 @@ pub fn run(input: String) {
                     }
                     continue;
                 } else {
-                    
                     let mut digits = 1;
                     let mut shift: BigUint = BigUint::ZERO + 10 as u32;
                     while n / shift.clone() >= BigUint::ZERO + 1 as u32 {
@@ -80,9 +79,6 @@ pub fn run(input: String) {
             p2 += val;
         }
     }
-
-   
-
 
     println!("Part 1: {}", p1);
     println!("Part 2: {}", p2);

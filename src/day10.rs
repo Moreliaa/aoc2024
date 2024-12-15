@@ -5,7 +5,6 @@ pub fn run(input: String) {
     let mut p1 = 0;
     let mut p2 = 0;
 
-
     let char_map = Map2D::from_string(input);
     let mut map: Map2D<u32> = Map2D::new(char_map.width(), char_map.height(), 0);
     for x in 0..map.width() {
@@ -16,10 +15,10 @@ pub fn run(input: String) {
 
     for x in 0..map.width() {
         for y in 0..map.height() {
-            if *map.get(x,y).unwrap() != 0 {
+            if *map.get(x, y).unwrap() != 0 {
                 continue;
             }
-            let dirs = [(1, 0),(0, 1),(-1, 0),(0, -1)];
+            let dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)];
             let mut seen: HashSet<(i32, i32)> = HashSet::new();
             for d in dirs {
                 let x_next = x + d.0;
@@ -34,7 +33,14 @@ pub fn run(input: String) {
     println!("Part 2: {}", p2);
 }
 
-fn check_path(map: &Map2D<u32>, x: i32, y: i32, x_last: i32, y_last: i32, seen: &mut HashSet<(i32, i32)>) -> i32 {
+fn check_path(
+    map: &Map2D<u32>,
+    x: i32,
+    y: i32,
+    x_last: i32,
+    y_last: i32,
+    seen: &mut HashSet<(i32, i32)>,
+) -> i32 {
     let curr_digit = map.get(x, y);
     if curr_digit == None {
         return 0;
@@ -53,7 +59,7 @@ fn check_path(map: &Map2D<u32>, x: i32, y: i32, x_last: i32, y_last: i32, seen: 
             return 1;
         }
     }
-    let dirs = [(1, 0),(0, 1),(-1, 0),(0, -1)];
+    let dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)];
     let mut result = 0;
     for d in dirs {
         let x_next = x + d.0;
@@ -79,7 +85,7 @@ fn check_path_pt2(map: &Map2D<u32>, x: i32, y: i32, x_last: i32, y_last: i32) ->
     if *curr_digit == 9 {
         return 1;
     }
-    let dirs = [(1, 0),(0, 1),(-1, 0),(0, -1)];
+    let dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)];
     let mut result = 0;
     for d in dirs {
         let x_next = x + d.0;

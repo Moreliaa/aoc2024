@@ -61,10 +61,7 @@ fn pt1(input: String) -> i64 {
     }
 
     blocks.append(&mut new_blocks);
-    blocks.sort_by(|a, b| {
-        a.0.cmp(&b.0)
-    });
-
+    blocks.sort_by(|a, b| a.0.cmp(&b.0));
 
     for b in blocks {
         let mut pos = b.0 as i64;
@@ -74,12 +71,10 @@ fn pt1(input: String) -> i64 {
             pos += 1;
             remaining -= 1;
         }
-        
     }
 
     return p1;
 }
-
 
 fn pt2(input: String) -> i64 {
     let input = input.lines().into_iter().next().unwrap();
@@ -116,22 +111,25 @@ fn pt2(input: String) -> i64 {
                 used_blocks.push(block_to_move);
                 break;
             } else if free_blocks[i].1 >= block_to_move.3 {
-                let new_block = (free_blocks[i].0, block_to_move.1, block_to_move.2, block_to_move.3);
+                let new_block = (
+                    free_blocks[i].0,
+                    block_to_move.1,
+                    block_to_move.2,
+                    block_to_move.3,
+                );
                 used_blocks.push(new_block);
 
                 let free_length = free_blocks[i].1 - block_to_move.3;
-                let free_start_position = free_blocks[i].0 + block_to_move.3 as usize;                
+                let free_start_position = free_blocks[i].0 + block_to_move.3 as usize;
                 let free_block = (free_start_position, free_length);
-                free_blocks.splice(i..i + 1,[free_block]);
+                free_blocks.splice(i..i + 1, [free_block]);
                 break;
             }
         }
     }
 
     used_blocks.append(&mut new_blocks);
-    used_blocks.sort_by(|a, b| {
-        a.0.cmp(&b.0)
-    });
+    used_blocks.sort_by(|a, b| a.0.cmp(&b.0));
 
     for b in used_blocks {
         let mut pos = b.0 as i64;
@@ -141,7 +139,6 @@ fn pt2(input: String) -> i64 {
             pos += 1;
             remaining -= 1;
         }
-        
     }
 
     return p2;

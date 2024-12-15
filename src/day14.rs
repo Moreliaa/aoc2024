@@ -1,12 +1,10 @@
-use fancy_regex::Regex;
 use aoc_lib::map2d::Map2D;
+use fancy_regex::Regex;
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::Path;
 
 pub fn run(input: String) {
-    let mut p1 = 0;
-
     let w = 101;
     let h = 103;
     let seconds = 10000;
@@ -68,7 +66,7 @@ pub fn run(input: String) {
         }
         robots.push(robot);
     }
-    p1 = quad_bl * quad_br * quad_tl * quad_tr;
+    let p1 = quad_bl * quad_br * quad_tl * quad_tr;
     println!("Part 1: {}", p1);
 
     for s in 0..seconds {
@@ -84,8 +82,6 @@ pub fn run(input: String) {
         let mut file = File::create(format!("{folder}/{}.ppm", s + 1)).unwrap();
         file.write_all(canvas_to_ppm(&map).as_bytes()).unwrap();
     }
-
-    
 }
 
 fn canvas_to_ppm(map: &Map2D<char>) -> String {
@@ -94,7 +90,7 @@ fn canvas_to_ppm(map: &Map2D<char>) -> String {
     let canvas_dim = format!("{} {}\n", map.width(), map.height());
     output.push(String::from(&canvas_dim));
     output.push(String::from("255\n"));
-    
+
     let max_characters = 70;
 
     let newline = String::from("\n");
@@ -113,10 +109,14 @@ fn canvas_to_ppm(map: &Map2D<char>) -> String {
                 }
             }
             let pixel = map.get(x, y).unwrap();
-            let colors = if *pixel == '#' { [255, 255, 255] } else { [0, 0, 0] };
+            let colors = if *pixel == '#' {
+                [255, 255, 255]
+            } else {
+                [0, 0, 0]
+            };
             for (i, c) in colors.iter().enumerate() {
                 let c_str = c.to_string();
-                
+
                 characters_in_line += c_str.len();
                 if characters_in_line > max_characters {
                     while output.last().unwrap() == &" " {

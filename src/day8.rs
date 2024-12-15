@@ -1,6 +1,6 @@
 use aoc_lib::map2d::Map2D;
-use std::collections::HashMap;
 use aoc_lib::util::manhattan_2d;
+use std::collections::HashMap;
 
 pub fn run(input: String) {
     let map = Map2D::from_string(input);
@@ -48,7 +48,15 @@ pub fn run(input: String) {
     println!("Part 2: {p2}");
 }
 
-fn step(map_anti: &mut Map2D<char>, n1: &(i32, i32), n2: &(i32, i32), x_start: i32, y_start: i32, step_x: i32, step_y: i32) {
+fn step(
+    map_anti: &mut Map2D<char>,
+    n1: &(i32, i32),
+    n2: &(i32, i32),
+    x_start: i32,
+    y_start: i32,
+    step_x: i32,
+    step_y: i32,
+) {
     let mut x_curr = x_start + step_x;
     let mut y_curr = y_start + step_y;
     while map_anti.is_in_bounds(x_curr, y_curr) {

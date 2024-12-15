@@ -3,7 +3,7 @@ use std::collections::HashSet;
 
 pub fn run(input: String) {
     let mut map = Map2D::from_string(input.clone());
-    
+
     let mut g = get_guard(&map);
     let g_cloned = g.clone();
     while g.step(&mut map) {}

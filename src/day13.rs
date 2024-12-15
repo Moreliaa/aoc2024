@@ -8,7 +8,6 @@ pub fn run(input: String) {
     let rx_prize = Regex::new(r"Prize: X=(\d+), Y=(\d+)").unwrap();
     let mut lines = input.lines().into_iter();
 
-
     loop {
         let l_a = lines.next();
         if l_a == None {
@@ -31,7 +30,7 @@ pub fn run(input: String) {
 
         let numerator_a = prize_y * offset_bx - prize_x * offset_by;
         let denominator_a = offset_ay * offset_bx - offset_ax * offset_by;
-        let num_a =  numerator_a / denominator_a;
+        let num_a = numerator_a / denominator_a;
         let numerator_b = prize_x - num_a * offset_ax;
         let num_b = numerator_b / offset_bx;
         if numerator_a % denominator_a == 0 && numerator_b % offset_bx == 0 {
@@ -43,7 +42,7 @@ pub fn run(input: String) {
         let prize_y = prize_y + prize_offset;
         let numerator_a = prize_y * offset_bx - prize_x * offset_by;
         let denominator_a = offset_ay * offset_bx - offset_ax * offset_by;
-        let num_a =  numerator_a / denominator_a;
+        let num_a = numerator_a / denominator_a;
         let numerator_b = prize_x - num_a * offset_ax;
         let num_b = numerator_b / offset_bx;
         if numerator_a % denominator_a == 0 && numerator_b % offset_bx == 0 {
