@@ -1,5 +1,5 @@
 use aoc_lib::map2d::Map2D;
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 
 pub fn run(input: String) {
     let limit_pt1 = 1024;
