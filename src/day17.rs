@@ -19,7 +19,6 @@ pub fn run(input: String) {
     let target_pt2 = program;
     let mut idx = target_pt2.len() as i64 - 1;
     while idx >= 0 {
-        let digit_to_find = target_pt2[idx as usize];
         let mut next_out: Vec<i64> = vec![];
         for perm in pt2_out.last().unwrap().iter() {
             let a_base = *perm;
@@ -32,10 +31,6 @@ pub fn run(input: String) {
                     }
                 }
                 next_out.push(a);
-                
-                if pt2_digits[0] == digit_to_find {
-                    
-                }
             }
         }
         pt2_out.push(next_out);
