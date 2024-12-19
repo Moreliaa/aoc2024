@@ -23,11 +23,18 @@ pub fn run(input: String) {
         let mut next_out: Vec<i64> = vec![];
         for perm in pt2_out.last().unwrap().iter() {
             let a_base = *perm;
-            for a_add in 0..9 {
+            'a: for a_add in 0..9 {
                 let a = a_base * 8 + a_add;
                 let pt2_digits = run_prog_pt2(a);
+                for (i_d, d) in pt2_digits.iter().enumerate() {
+                    if *d != target_pt2[idx as usize + i_d] {
+                        continue 'a;
+                    }
+                }
+                next_out.push(a);
+                
                 if pt2_digits[0] == digit_to_find {
-                    next_out.push(a);
+                    
                 }
             }
         }
@@ -44,12 +51,15 @@ pub fn run(input: String) {
 
 fn run_prog_pt2(mut a: i64) -> Vec<i64> {
     let mut prog: Vec<i64> = vec![];
+    let orig_a = a;
     while a > 0 {
         let next = ((((a % 8) ^ 5 ) ^ (a / 2_i64.pow((a as u32 % 8) ^ 5))) ^ 6) % 8;
         prog.push(next);
         a /= 8;
     }
-    prog.push(0);
+    if orig_a == 0 {
+       prog.push(0);
+    }
     return prog;
 }
 
