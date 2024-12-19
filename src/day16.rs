@@ -3,9 +3,6 @@ use std::{collections::{HashMap, HashSet}, i32};
 use std::collections::BinaryHeap;
 use std::cmp::Reverse;
 pub fn run(input: String) {
-    
-    let mut p2 = 0;
-
     let map = Map2D::from_string(input);
     let x_prev = map.aggregate(|val, x, _| if *val == 'S' { x } else { 0 });
     let y_prev = map.aggregate(|val, _, y| if *val == 'S' { y } else { 0 });
