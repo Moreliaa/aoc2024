@@ -19,9 +19,8 @@ pub fn run(input: String) {
     let mut seen: HashMap<(i32, i32), i32> = HashMap::new();
     let mut unseen: VecDeque<(i32, i32, i32)> = VecDeque::new();
     let target = 'E';
+    let min_shortcut = 100;
     unseen.push_back((x_start, y_start, 0));
-    let mut x_target = 0;
-    let mut y_target = 0;
     
     loop {
         let u = unseen.pop_front().unwrap();
@@ -32,10 +31,9 @@ pub fn run(input: String) {
             continue;
         }
         seen.insert((pos_x, pos_y), steps);
+        
 
         if *map.get(pos_x, pos_y).unwrap() == target {
-            x_target = pos_x;
-            y_target = pos_y;
             break;
         }
 
@@ -69,15 +67,40 @@ pub fn run(input: String) {
             if let Some(val) = seen.get(&item) {
                 if new_dist < *val {
                     let shortcut = val - new_dist;
-                    if shortcut >= 100 {
+                    if shortcut >= min_shortcut {
                         shortcuts_pt1.push((shortcut, *x_start, *y_start, x_end, y_end));
                     }
                 }
             }
         }
-
     }
 
     println!("Part 1: {}", shortcuts_pt1.len());
+
+    let mut shortcuts_pt2: Vec<(i32, i32, i32, i32, i32)> = vec![];
+    
+    for ((x_start, y_start), d) in seen.iter() {
+        let max_dist = 20;
+        for x_end in x_start - max_dist..=x_start + max_dist {
+            for y_end in y_start - max_dist..=y_start + max_dist {
+                let dist_to_coord = aoc_lib::util::manhattan_2d((x_end, y_end), (*x_start, *y_start));
+                if !map.is_in_bounds(x_end, y_end) || *map.get(x_end, y_end).unwrap() == '#' || dist_to_coord > max_dist {
+                    continue;
+                }
+                let new_dist = d + dist_to_coord;
+                let item = (x_end, y_end);
+                if let Some(val) = seen.get(&item) {
+                    if new_dist < *val {
+                        let shortcut = val - new_dist;
+                        if shortcut >= min_shortcut {
+                            shortcuts_pt2.push((shortcut, *x_start, *y_start, x_end, y_end));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    println!("Part 2: {}", shortcuts_pt2.len());
 
 }
